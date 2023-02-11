@@ -14,3 +14,5 @@ srch_bar = driver.find_element('name', 'q')
 srch_bar.send_keys("Hello World!")
 srch_btn2 = driver.find_element('name', 'btnK')
 srch_btn2.submit()
+driver.quit()
+

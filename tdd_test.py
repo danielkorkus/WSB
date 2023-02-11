@@ -22,6 +22,7 @@ def test_no_of_letter():
     assert fissbuzz(1.3) == 1
     assert fissbuzz(1.9) == 1
     assert fissbuzz(4) == 4
+    assert fissbuzz(0) == None
     assert fissbuzz("1") == 1
     assert fissbuzz(3) == 'fiss'
     assert fissbuzz(15) == 'fissbuzz'

@@ -11,7 +11,7 @@
 
 def fissbuzz(i):
     if isinstance(i, (str, float)): return int(i)
-    if i < 0: return None
+    if i <= 0: return None
     if i % 3 == 0 and i % 5 == 0:
         return "fissbuzz"
     elif i % 5 == 0:
