@@ -18,5 +18,6 @@ def test_loginpage():
     page.enter_password('secret_sauce')
     page.click_login_button()
     time.sleep(3)
-    assert driver.current_url == 'https://www.saucedemo.com/inventory.html'
+    # after coma if assert failed
+    assert driver.current_url == 'https://www.saucedemo.com/inventory.html', make_screenshot(driver)
     driver.quit()
