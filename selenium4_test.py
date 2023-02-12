@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium4 import LoginPage
 import datetime
 import time
+import pytest
 
 
 def make_screenshot(d):
@@ -10,14 +11,23 @@ def make_screenshot(d):
     d.get_screenshot_as_file(screenshot)
 
 
-def test_loginpage():
+test_data = [('standard_user', 'secret_sauce', 'https://www.saucedemo.com/inventory.html'),
+             ('locked_out_user', 'secret_sauce', 'https://www.saucedemo.com/inventory.html'),
+             ('problem_user', 'secret_sauce', 'https://www.saucedemo.com/inventory.html'),
+             ('performance_glitch_user', 'secret_sauce', 'https://www.saucedemo.com/inventory.html')]
+
+
+@pytest.mark.parametrize('user, password, url', test_data)
+def test_loginpage(user, password, url):
     driver = webdriver.Edge()
     page = LoginPage(driver, 'user-name', 'password', 'login-button')
     page.open_page()
-    page.enter_username('standard_user')
-    page.enter_password('secret_sauce')
+    page.enter_username(user)
+    page.enter_password(password)
     page.click_login_button()
     time.sleep(3)
     # after coma if assert failed
-    assert driver.current_url == 'https://www.saucedemo.com/inventory.html', make_screenshot(driver)
-    driver.quit()
+    try:
+        assert driver.current_url == url, make_screenshot(driver)
+    finally:
+        driver.quit()
