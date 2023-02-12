@@ -4,7 +4,7 @@
 Library     SeleniumLibrary
 
 *** Variables ***
-
+# ${int} , @{list} , &{str}
 
 
 *** Keywords ***
@@ -13,8 +13,11 @@ Library     SeleniumLibrary
 
 *** Test Cases ***
 Test 1
-    Open Browser    https://pl.wikipedia.org  edge
-    Click Element   pt-login
-    sleep           3
-    Input Text      wpName1     RobotTests
-    Input Text      //*[@id="wpPassword1"]  RobotFramework
+    #Variable       #Keywords           #Instructions
+                    Open Browser        https://pl.wikipedia.org  edge
+                    Click Element       pt-login
+    ${my_value}     Get Text            wpName1
+                    should be empty     ${my_value}
+                    sleep               3
+                    Input Text          wpName1     RobotTests
+                    Input Text          //*[@id="wpPassword1"]  RobotFramework
